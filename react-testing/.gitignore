@@ -24,4 +24,3 @@ yarn-error.log*
 
 # My additions - package files
 *.vscode
-*.DS_Store

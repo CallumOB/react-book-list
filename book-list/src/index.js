@@ -2,54 +2,73 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+const title = "Spare";
+const author = "Prince Harry";
+const image = "./images/spare.jpg";
+
+// Objects containing properties for second books
+const firstBook = {
+    author: "Prince Harry",
+    title: "Spare",
+    img: "https://m.media-amazon.com/images/I/81pHW0GJIlL._SL1500_.jpg",
+};
+
+const secondBook = {
+    author: "James Clear",
+    title: "Atomic Habits",
+    img: "https://m.media-amazon.com/images/I/81JH6w9Um3L._SL1500_.jpg",
+};
+
 const BookList = () => {
     return <section className="bookList">
-        <Book/>
-        <Book/>
-        <Book/>
-        <Book/>
+        <Book author={firstBook.author} title={firstBook.title} img={firstBook.img}>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus minima fugiat quasi ex autem commodi fugit placeat, sapiente culpa suscipit quos explicabo repudiandae. Repellat quidem numquam reiciendis ut voluptates error.</p>
+            <button>Button</button>
+        </Book>
+        <Book author={firstBook.author} title={firstBook.title} img={firstBook.img} />
+        <Book author={secondBook.author} title={secondBook.title} img={secondBook.img} />
+        <Book author={secondBook.author} title={secondBook.title} img={secondBook.img} />
+        <Book author={firstBook.author} title={firstBook.title} img={firstBook.img} />
+        <Book author={firstBook.author} title={firstBook.title} img={firstBook.img} />
     </section>;
 }
 
-// const Book = () => {
-//     return (
-//         <article className='book'>
-//             <Image/>
-//             <Title/>
-//             <Author/>
-//         </article>
-//     );
-// }
-// Don't need to create a new component to nest either, can just implicitly write the JSX
+const Book = (props) => {
+    console.log(props);
+    // This can be done so we don't have to reference props.x every time.
+    // Can also be done using const Function = ({prop1, prop2}) instead of = (props).
+    const { img, title, author, children} = props;
 
-const Book = () => {
-    const title = "Spare";
-    const author = "Prince Harry";
     return (
         <article className='book'>
-            <img
-                src='./images/spare.jpg'
-                alt='Spare'
-            />
+            <img src={img} />
+            {/* This MUST be a return value. */}
             {/* Curly brackets mean using normal JS. Comes in handy for dynamic pages. */}
-            <h2>{title}</h2>
-            <h4>{author}</h4>
+            <h2>{props.title}</h2>
+            <h4>{props.author}</h4>
+
+            {/* Props will ONLY be displayed if they are provided. */}
+            <p>{props.job}</p>
+            <p>{props.title}</p>
+            <p>{props.number}</p>
+            {children}
         </article>
     );
 }
 
-const Image = () => <img src="./images/spare.jpg" alt="Spare Cover" />
-const Title = () => <h1>Spare</h1>
-const Author = () => {
-    const AuthorStyle = {
-        color: '#617d98',
-        fontSize: '0.75rem',
-        marginTop: '0.5rem',
-    };
-    return <h4 style={AuthorStyle}>Prince Harry</h4>;
-    // Inline styles also work, but passing an object is easier.
-}
+const books = [
+    {
+        author: "Prince Harry",
+        title: "Spare",
+        img: "https://m.media-amazon.com/images/I/81pHW0GJIlL._SL1500_.jpg",
+    },
+    {
+        author: "James Clear",
+        title: "Atomic Habits",
+        img: "https://m.media-amazon.com/images/I/81JH6w9Um3L._SL1500_.jpg",
+    },
+];
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(<BookList/>);
+root.render(<BookList />);

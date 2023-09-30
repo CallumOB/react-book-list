@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+// curly brackets are used to import specific elements from other files.
+import { Book } from './Book';
+import { books } from './books';
+
 const title = "Spare";
 const author = "Prince Harry";
 const image = "./images/spare.jpg";
@@ -35,48 +39,13 @@ const BookList = () => {
     </section>;
 }
 
-const Book = (props) => {
-    console.log(props);
-    // This can be done so we don't have to reference props.x every time.
-    // Can also be done using const Function = ({prop1, prop2}) instead of = (props).
-    const { img, title, author, children} = props;
-
-    return (
-        <article className='book'>
-            <img src={img} />
-            {/* This MUST be a return value. */}
-            {/* Curly brackets mean using normal JS. Comes in handy for dynamic pages. */}
-            <h2>{props.title}</h2>
-            <h4>{props.author}</h4>
-
-            {/* Props will ONLY be displayed if they are provided. */}
-            <p>{props.job}</p>
-            <p>{props.title}</p>
-            <p>{props.number}</p>
-            {/* {children} */}
-        </article>
-    );
-}
-
-// We can use arrays and iteration to display content in react. 
-const books = [
-    {
-        author: "Prince Harry",
-        title: "Spare",
-        img: "https://m.media-amazon.com/images/I/81pHW0GJIlL._SL1500_.jpg",
-        id: 1, // Each member of an array should have a unique 'key'. Usually this is pulled from a DB. 
-    },
-    {
-        author: "James Clear",
-        title: "Atomic Habits",
-        img: "https://m.media-amazon.com/images/I/81JH6w9Um3L._SL1500_.jpg",
-        id: 2,
-    },
-];
-
 // We can return the book object itself, and pass the values from the 'books' array as props.
 // This means all of the logic to do with rendering can be contained within the Book object itself.
 const BookListArray = () => {
+    const getBook = (id) => {
+        const book = books.find((book) => book.id === id);
+        console.log(book);
+    }
     return <section className='bookList'>
         <EventExample />
         {books.map((book) => {
@@ -84,12 +53,12 @@ const BookListArray = () => {
             // return <Book author={book.author} title={book.title} img={book.img} key={book.id}/>;
 
             // Can also be done as below.
-            return <Book {...book} key={book.id} />;
+            return <Book {...book} key={book.id} getBook={getBook} />;
         })}
     </section>;
 }
 
-// Event Handling
+// Event Handling Examples
 const EventExample = () => {
     const handleFormInput = (e) => {
         console.log(e);

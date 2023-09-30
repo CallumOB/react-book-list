@@ -10,6 +10,12 @@ body {
     color: #222;
 }
 
+.site-title {
+    text-align: center;
+    margin-top: 5rem;
+    text-transform: capitalize;
+}
+
 .bookList {
     width: 90vw;
     max-width: 1170px;
@@ -30,6 +36,7 @@ body {
     border-radius: 1em;
     padding: 2rem;
     text-align: center;
+    position: relative;
 }
 
 .book img {
@@ -41,4 +48,16 @@ body {
 .book h2 {
     margin-top: 1rem;
     font-size: 1rem;
+}
+
+.rank {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background-color: orange;
+    color: white;
 }

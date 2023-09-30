@@ -6,10 +6,6 @@ import './index.css';
 import { Book } from './Book';
 import { books } from './books';
 
-const title = "Spare";
-const author = "Prince Harry";
-const image = "./images/spare.jpg";
-
 // Objects containing properties for second books
 const firstBook = {
     author: "Prince Harry",
@@ -46,16 +42,19 @@ const BookListArray = () => {
         const book = books.find((book) => book.id === id);
         console.log(book);
     }
-    return <section className='bookList'>
-        <EventExample />
-        {books.map((book) => {
-            // const {author, title, img, id} = book;
-            // return <Book author={book.author} title={book.title} img={book.img} key={book.id}/>;
+    return (
+        <>
+            <h1 className='site-title'>Amazon Best Sellers</h1>
+            <section className='bookList'>
+                {books.map((book, index) => {
+                    // const {author, title, img, id} = book;
+                    // return <Book author={book.author} title={book.title} img={book.img} key={book.id}/>;
 
-            // Can also be done as below.
-            return <Book {...book} key={book.id} getBook={getBook} />;
-        })}
-    </section>;
+                    // Can also be done as below.
+                    return <Book {...book} key={book.id} getBook={getBook} index={index}/>;
+                })}
+            </section>
+        </>);
 }
 
 // Event Handling Examples
